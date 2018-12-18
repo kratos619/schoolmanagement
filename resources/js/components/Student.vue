@@ -62,7 +62,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form @submit.prevent="createStudents">
+          <form @submit.prevent="isUpdate ? updateStudent() : createStudents()">
             <div class="modal-body">
               <div class="form-group">
                 <label for>Name</label>
@@ -175,6 +175,7 @@ export default {
       isUpdate: false,
       students: {},
       form: new Form({
+        id: "",
         name: "",
         rollnumber: "",
         address: "",
@@ -199,6 +200,24 @@ export default {
       $(".bd-example-modal-lg").modal("show");
       this.form.fill(student);
     },
+    updateStudent(id) {
+      //console.log("update Modal");
+      //     this.$Progress.start();
+      this.form
+        .put("api/students/" + this.form.id)
+        .then(() => {
+          //success
+          toast({
+            type: "success",
+            title: "Student Update successfully"
+          });
+          this.loadUser();
+          $(".bd-example-modal-lg").modal("show");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     createStudents() {
       this.form
         .post("api/students")
@@ -208,7 +227,7 @@ export default {
             type: "success",
             title: "User Created successfully"
           });
-          this.form.reset();
+
           this.loadUser();
         })
         .catch(e => {

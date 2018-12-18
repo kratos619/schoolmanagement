@@ -54226,6 +54226,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isUpdate: false,
       students: {},
       form: new Form((_ref = {
+        id: "",
         name: "",
         rollnumber: "",
         address: "",
@@ -54252,8 +54253,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $(".bd-example-modal-lg").modal("show");
       this.form.fill(student);
     },
-    createStudents: function createStudents() {
+    updateStudent: function updateStudent(id) {
       var _this2 = this;
+
+      //console.log("update Modal");
+      //     this.$Progress.start();
+      this.form.put("api/students/" + this.form.id).then(function () {
+        //success
+        toast({
+          type: "success",
+          title: "Student Update successfully"
+        });
+        _this2.loadUser();
+        $(".bd-example-modal-lg").modal("show");
+      }).catch(function (e) {
+        console.log(e);
+      });
+    },
+    createStudents: function createStudents() {
+      var _this3 = this;
 
       this.form.post("api/students").then(function (_ref3) {
         var data = _ref3.data;
@@ -54263,8 +54281,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           type: "success",
           title: "User Created successfully"
         });
-        _this2.form.reset();
-        _this2.loadUser();
+
+        _this3.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
@@ -54370,7 +54388,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.createStudents($event)
+                    _vm.isUpdate ? _vm.updateStudent() : _vm.createStudents()
                   }
                 }
               },

@@ -36,7 +36,7 @@ class StudentController extends Controller
             'address' => 'required'
         ]);
 
-         Student::create([
+        Student::create([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'dob' => $request->dob ,
@@ -45,8 +45,6 @@ class StudentController extends Controller
             'gender' => $request->gender,
             'address' => $request->address
         ]);
-
-        
     }
 
     /**
@@ -81,11 +79,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update_students = Student::find($id);
+        $update_students = Student::findOrFail($id);
 
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'mobile' => 'required|unique:students',
+            'mobile' => 'required|unique:students,mobile,'.$update_students->id ,
             'dob' => 'required',
             'course' => 'required',
             'rollnumber' => 'required',
@@ -93,7 +91,7 @@ class StudentController extends Controller
             'address' => 'required'
         ]);
 
-        $update_students->update();
+        $update_students->update($request->all());
 
         return response()->json($update_students, 200);
     }
