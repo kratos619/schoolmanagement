@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -8,6 +7,12 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+import VueRouter from 'vue-router';
+
+Vue.use(VueRouter);
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,6 +24,11 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+let routes = [{
+    path: '/student',
+    component: require('./components/Student.vue')
+}];
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
@@ -27,7 +37,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+const router = new VueRouter({
+    mode: 'history',
+    routes, // short for `routes: routes`
+    linkActiveClass: 'active'
+});
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    routes,
+    router
 });
