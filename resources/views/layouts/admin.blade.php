@@ -86,12 +86,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                </router-link>
               </li>
               
-               <li class="nav-item">
-                <router-link to="/student" class="nav-link " href="#">
-                 <i class="fas fa-user"></i>
-                  <p>students</p>
-                </router-link>
-              </li>
 
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link ">
@@ -104,15 +98,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link  to="/doctors" class="nav-link ">
+                <router-link  to="/teachers" class="nav-link ">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Doctors</p>
+                  <p>Teacher</p>
+                </router-link>
+              </li>
+              
+               <li class="nav-item">
+                <router-link to="/student" class="nav-link " href="#">
+                 <i class="fas fa-user"></i>
+                  <p>Student</p>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/appoinment" class="nav-link">
+                <router-link to="/courses" class="nav-link">
                   <i class="fa fa-circle-o nav-icon"></i>
-                  <p>Appoinment</p>
+                  <p>Courses</p>
                 </router-link>
               </li>
             </ul>

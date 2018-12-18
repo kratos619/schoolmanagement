@@ -25,9 +25,22 @@ Vue.use(VueRouter);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 let routes = [{
-    path: '/student',
-    component: require('./components/Student.vue')
-}];
+        path: '/student',
+        component: require('./components/Student.vue')
+    },
+    {
+        path: '/teachers',
+        component: require('./components/Teachers.vue')
+    },
+    {
+        path: '/dashboard',
+        component: require('./components/Dashboard.vue')
+    },
+    {
+        path: '/courses',
+        component: require('./components/Courses.vue')
+    },
+];
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
