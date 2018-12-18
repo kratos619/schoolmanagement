@@ -44,3 +44,9 @@ $factory->define(App\Teachers::class, function (Faker $faker) {
         "department_id" => $faker->numberBetween(1, 10),
     ];
 });
+
+// $factory->define(App\Courses::class, function (Faker $faker) {
+//     return [
+//         'name' => $faker->name
+//     ];
+// });
