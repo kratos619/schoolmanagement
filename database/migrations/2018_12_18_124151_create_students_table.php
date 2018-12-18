@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('gender');
             $table->text('address');
+            $table->string('rollnumber')->unique();
             $table->string('mobile');
             $table->date('dob');
             $table->integer('course');
