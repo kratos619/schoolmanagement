@@ -22,3 +22,16 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\Student::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'gender' => $faker->title($gender = 'male'|'female') ,
+        'address' => $faker->address(),
+        'mobile' => $faker->phoneNumber,
+        'dob' => $faker->dateTimeBetween($startDate = '-18 years', $endDate = 'now', $timezone = null),
+        "rollnumber" =>$faker->ean8(),
+        "course" => $faker->numberBetween(1, 10),
+    ];
+});
