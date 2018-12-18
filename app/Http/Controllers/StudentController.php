@@ -26,6 +26,31 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $erors =  $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'mobile' => 'required|unique:students',
+            'dob' => 'required',
+            'course' => 'required',
+            'rollnumber' => 'required',
+            'gender' => 'required',
+            'address' => 'required'
+        ]);
+
+        $student = Student::create([
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+            'dob' => $request->dob ,
+            'course' =>$request->course,
+            'rollnumber' => $request->rollnumber,
+            'gender' => $request->gender,
+            'address' => $request->address
+        ]);
+
+        if ($student) {
+            return response()->json($student, 200);
+        } else {
+            return response()->json($erors, 500);
+        }
     }
 
     /**
@@ -60,7 +85,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update_students = Student::find($id);
+
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'mobile' => 'required|unique:students',
+            'dob' => 'required',
+            'course' => 'required',
+            'rollnumber' => 'required',
+            'gender' => 'required',
+            'address' => 'required'
+        ]);
+
+        $update_students->update();
+
+        return response()->json($update_students, 200);
     }
 
     /**
@@ -71,6 +110,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Student::find($id);
+        $item->delete();
+        return response()->json('success');
     }
 }
