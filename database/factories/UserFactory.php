@@ -35,3 +35,12 @@ $factory->define(App\Student::class, function (Faker $faker) {
         "course" => $faker->numberBetween(1, 10),
     ];
 });
+$factory->define(App\Teachers::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'gender' => $faker->title($gender = 'male'|'female') ,
+        'address' => $faker->address(),
+        'mobile' => $faker->phoneNumber,
+        "department_id" => $faker->numberBetween(1, 10),
+    ];
+});
