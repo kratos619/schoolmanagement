@@ -54223,6 +54223,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _ref;
 
     return {
+      isUpdate: false,
       students: {},
       form: new Form((_ref = {
         name: "",
@@ -54245,6 +54246,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.students = data.data;
       });
     },
+    updateModalOpen: function updateModalOpen(student) {
+      this.isUpdate = true;
+      this.form.reset();
+      $(".bd-example-modal-lg").modal("show");
+      this.form.fill(student);
+    },
     createStudents: function createStudents() {
       var _this2 = this;
 
@@ -54256,6 +54263,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           type: "success",
           title: "User Created successfully"
         });
+        _this2.form.reset();
         _this2.loadUser();
       }).catch(function (e) {
         console.log(e);
@@ -54312,9 +54320,23 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(student.address) + ".")]),
                       _vm._v(" "),
-                      _vm._m(2, true),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                _vm.updateModalOpen(student)
+                              }
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        )
+                      ]),
                       _vm._v(" "),
-                      _vm._m(3, true)
+                      _vm._m(2, true)
                     ])
                   })
                 ],
@@ -54340,7 +54362,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-lg" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(4),
+            _vm._m(3),
             _vm._v(" "),
             _c(
               "form",
@@ -54674,7 +54696,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(5)
+                _vm._m(4)
               ]
             )
           ])
@@ -54722,16 +54744,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Edite")]),
       _vm._v(" "),
       _c("th", [_vm._v("Delete")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-warning", attrs: { href: "" } }, [
-        _vm._v("Edit")
-      ])
     ])
   },
   function() {

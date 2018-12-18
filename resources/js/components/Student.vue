@@ -34,7 +34,7 @@
                   <td>{{student.course}}</td>
                   <td>{{student.address}}.</td>
                   <td>
-                    <a href class="btn btn-warning">Edit</a>
+                    <a href="#" v-on:click="updateModalOpen(student)" class="btn btn-warning">Edit</a>
                   </td>
                   <td>
                     <a href class="btn btn-danger">Delete</a>
@@ -172,6 +172,7 @@
 export default {
   data() {
     return {
+      isUpdate: false,
       students: {},
       form: new Form({
         name: "",
@@ -192,6 +193,12 @@ export default {
         this.students = data.data;
       });
     },
+    updateModalOpen(student) {
+      this.isUpdate = true;
+      this.form.reset();
+      $(".bd-example-modal-lg").modal("show");
+      this.form.fill(student);
+    },
     createStudents() {
       this.form
         .post("api/students")
@@ -201,6 +208,7 @@ export default {
             type: "success",
             title: "User Created successfully"
           });
+          this.form.reset();
           this.loadUser();
         })
         .catch(e => {
