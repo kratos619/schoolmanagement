@@ -54256,16 +54256,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     updateStudent: function updateStudent(id) {
       var _this2 = this;
 
-      //console.log("update Modal");
-      //     this.$Progress.start();
       this.form.put("api/students/" + this.form.id).then(function () {
         //success
         toast({
           type: "success",
           title: "Student Update successfully"
         });
+        $(".bd-example-modal-lg").modal("hide");
         _this2.loadUser();
-        $(".bd-example-modal-lg").modal("show");
       }).catch(function (e) {
         console.log(e);
       });
@@ -54279,7 +54277,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         $(".bd-example-modal-lg").modal("hide");
         toast({
           type: "success",
-          title: "User Created successfully"
+          title: "Studnet Created successfully"
         });
 
         _this3.loadUser();

@@ -201,8 +201,6 @@ export default {
       this.form.fill(student);
     },
     updateStudent(id) {
-      //console.log("update Modal");
-      //     this.$Progress.start();
       this.form
         .put("api/students/" + this.form.id)
         .then(() => {
@@ -211,8 +209,8 @@ export default {
             type: "success",
             title: "Student Update successfully"
           });
+          $(".bd-example-modal-lg").modal("hide");
           this.loadUser();
-          $(".bd-example-modal-lg").modal("show");
         })
         .catch(e => {
           console.log(e);
@@ -225,7 +223,7 @@ export default {
           $(".bd-example-modal-lg").modal("hide");
           toast({
             type: "success",
-            title: "User Created successfully"
+            title: "Studnet Created successfully"
           });
 
           this.loadUser();
