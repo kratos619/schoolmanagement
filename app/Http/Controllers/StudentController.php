@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $erors =  $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|string|max:255',
             'mobile' => 'required|unique:students',
             'dob' => 'required',
@@ -36,7 +36,7 @@ class StudentController extends Controller
             'address' => 'required'
         ]);
 
-        $student = Student::create([
+         Student::create([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'dob' => $request->dob ,
@@ -46,11 +46,7 @@ class StudentController extends Controller
             'address' => $request->address
         ]);
 
-        if ($student) {
-            return response()->json($student, 200);
-        } else {
-            return response()->json($erors, 500);
-        }
+        
     }
 
     /**

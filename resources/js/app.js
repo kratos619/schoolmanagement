@@ -12,6 +12,23 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+import swal from 'sweetalert2';
+import {
+    Form,
+    HasError,
+    AlertError
+} from 'vform';
+window.Form = Form;
+window.swal = swal;
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
 
 
 /**
