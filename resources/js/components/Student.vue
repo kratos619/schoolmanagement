@@ -37,7 +37,7 @@
                     <a href="#" v-on:click="updateModalOpen(student)" class="btn btn-warning">Edit</a>
                   </td>
                   <td>
-                    <a href class="btn btn-danger">Delete</a>
+                    <a href="#" v-on:click="deleteStudent(student.id)" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
               </tbody>
@@ -227,6 +227,30 @@ export default {
           });
 
           this.loadUser();
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    deleteStudent(id) {
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      })
+        .then(result => {
+          if (result.value) {
+            this.form.delete("api/students/" + id).then(() => {
+              swal("Deleted!", "Your file has been deleted.", "success");
+              // This is relode page after event perform
+              this.loadUser();
+            });
+          }
         })
         .catch(e => {
           console.log(e);

@@ -54284,6 +54284,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).catch(function (e) {
         console.log(e);
       });
+    },
+    deleteStudent: function deleteStudent(id) {
+      var _this4 = this;
+
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(function (result) {
+        if (result.value) {
+          _this4.form.delete("api/students/" + id).then(function () {
+            swal("Deleted!", "Your file has been deleted.", "success");
+            // This is relode page after event perform
+            _this4.loadUser();
+          });
+        }
+      }).catch(function (e) {
+        console.log(e);
+      });
     }
   },
 
@@ -54352,7 +54375,21 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                _vm.deleteStudent(student.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Delete")]
+                        )
+                      ])
                     ])
                   })
                 ],
@@ -54378,7 +54415,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-lg" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c(
               "form",
@@ -54712,7 +54749,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]
             )
           ])
@@ -54760,16 +54797,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Edite")]),
       _vm._v(" "),
       _c("th", [_vm._v("Delete")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-danger", attrs: { href: "" } }, [
-        _vm._v("Delete")
-      ])
     ])
   },
   function() {
