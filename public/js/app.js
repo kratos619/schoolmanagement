@@ -55126,7 +55126,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get("api/teachers").then(function (_ref) {
         var data = _ref.data;
 
-        _this.teachers = data.data;
+        _this.teachers = data;
+      });
+    },
+    loadDepartment: function loadDepartment() {
+      var _this2 = this;
+
+      axios.get("api/department").then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this2.departments = data;
+        console.log(_this2.departments);
+      }).catch(function (e) {
+        console.log(e);
       });
     },
     updateModalOpen: function updateModalOpen(teacher) {
@@ -55136,7 +55148,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.fill(teacher);
     },
     updateTeacher: function updateTeacher(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.form.put("api/teachers/" + this.form.id).then(function () {
         //success
@@ -55145,16 +55157,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: "Data Update successfully"
         });
         $(".bd-example-modal-lg").modal("hide");
-        _this2.loadUser();
+        _this3.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
     },
     createTeacher: function createTeacher() {
-      var _this3 = this;
+      var _this4 = this;
 
-      this.form.post("api/teachers").then(function (_ref2) {
-        var data = _ref2.data;
+      this.form.post("api/teachers").then(function (_ref3) {
+        var data = _ref3.data;
 
         $(".bd-example-modal-lg").modal("hide");
         toast({
@@ -55162,13 +55174,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: "Teachers Created successfully"
         });
 
-        _this3.loadUser();
+        _this4.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
     },
     deleteTeacher: function deleteTeacher(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal({
         title: "Are you sure?",
@@ -55180,10 +55192,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
-          _this4.form.delete("api/teachers/" + id).then(function () {
+          _this5.form.delete("api/teachers/" + id).then(function () {
             swal("Deleted!", "Your file has been deleted.", "success");
             // This is relode page after event perform
-            _this4.loadUser();
+            _this5.loadUser();
           });
         }
       }).catch(function (e) {
@@ -55226,7 +55238,7 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._l((_vm.teachers, _vm.data), function(teacher) {
+                  _vm._l(_vm.teachers, function(teacher) {
                     return _c("tr", { key: teacher.id }, [
                       _c("td", [_vm._v(_vm._s(teacher.id))]),
                       _vm._v(" "),
@@ -56294,12 +56306,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isEdit: false,
+      departments: {},
       courses: {},
       form: new Form({
         id: "",
@@ -56342,7 +56354,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
         $("#exampleModal").modal("hide");
 
-        _this2.loadUser();
+        _this2.loadCourses();
       }).catch(function (e) {
         console.log(e);
       });
@@ -56401,22 +56413,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
-        [_vm._v("add New Course")]
-      ),
-      _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
           _c("div", { staticClass: "card-header" }, [_vm._v("Course Details")]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#exampleModal"
+              }
+            },
+            [_vm._v("add New Course")]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("table", { staticClass: "table" }, [
@@ -56920,24 +56932,24 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
-        [_vm._v("add New Department")]
-      ),
-      _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
           _c("div", { staticClass: "card-header" }, [
             _vm._v("Department Details")
           ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#exampleModal"
+              }
+            },
+            [_vm._v("add New Department")]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("table", { staticClass: "table" }, [

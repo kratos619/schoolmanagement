@@ -1,16 +1,15 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-toggle="modal"
-        data-target="#exampleModal"
-      >add New Course</button>
       <div class="col-md-12">
         <div class="card card-default">
           <div class="card-header">Course Details</div>
-
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >add New Course</button>
           <div class="card-body">
             <table class="table">
               <thead>
@@ -99,6 +98,7 @@ export default {
   data() {
     return {
       isEdit: false,
+      departments: {},
       courses: {},
       form: new Form({
         id: "",
@@ -139,7 +139,7 @@ export default {
           });
           $("#exampleModal").modal("hide");
 
-          this.loadUser();
+          this.loadCourses();
         })
         .catch(e => {
           console.log(e);
