@@ -198,7 +198,7 @@ export default {
   methods: {
     loadUser() {
       axios.get("api/students").then(({ data }) => {
-        this.students = data.data;
+        this.students = data;
       });
     },
     loadCourse() {

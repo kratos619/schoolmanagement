@@ -56735,7 +56735,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.get("api/students").then(function (_ref2) {
         var data = _ref2.data;
 
-        _this.students = data.data;
+        _this.students = data;
       });
     },
     loadCourse: function loadCourse() {
