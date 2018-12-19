@@ -57,6 +57,11 @@ let routes = [{
         path: '/courses',
         component: require('./components/Courses.vue')
     },
+    {
+        path: '/departments',
+        component: require('./components/Department.vue')
+    }
+
 ];
 
 // const files = require.context('./', true, /\.vue$/i)

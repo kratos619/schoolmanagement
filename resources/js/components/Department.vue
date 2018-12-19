@@ -166,8 +166,8 @@ export default {
       axios
         .get("api/department")
         .then(({ data }) => {
-          this.courses = data;
-          console.log(this.courses);
+          this.departments = data;
+          console.log(this.departments);
         })
         .catch(e => {
           console.log(e);

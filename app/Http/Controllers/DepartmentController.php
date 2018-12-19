@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Department;
 
 class DepartmentController extends Controller
 {
@@ -13,17 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $all_department = Department::all();
+        return response()->json($all_department, 200);
     }
 
     /**
@@ -34,7 +26,14 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+           'name' => 'required'
+       ]);
+       
+        Department::create([
+           'name' => $request->name
+       ]);
+        return response()->json("Success", 200);
     }
 
     /**
@@ -45,18 +44,8 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $select_department  = Department::findOrFail($id);
+        return response()->json($select_department, 200);
     }
 
     /**
@@ -68,7 +57,12 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $slecte_depertment = Department::findOrFail($id);
+        $this->validate($request, [
+           'name' => 'required'
+       ]);
+        $slecte_depertment->update($request->all());
+        return response()->json("Success", 200);
     }
 
     /**
@@ -79,6 +73,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $selecet_depertment = Department::find($id);
+        $selecet_depertment->delete();
+        return response()->json($selecet_depertment, 200);
     }
 }

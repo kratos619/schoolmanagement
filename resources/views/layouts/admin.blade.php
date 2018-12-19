@@ -116,6 +116,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Courses</p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link to="/departments" class="nav-link">
+                  <i class="fa fa-circle-o nav-icon"></i>
+                  <p>Department</p>
+                </router-link>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
