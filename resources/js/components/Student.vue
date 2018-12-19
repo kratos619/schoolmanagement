@@ -133,15 +133,21 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="course">Course</label>
-                    <input
+                    <label for="gender">Course</label>
+                    <select
                       v-model="form.course"
                       class="form-control"
-                      type="text"
                       name="course"
                       :class="{ 'is-invalid': form.errors.has('course') }"
                     >
-                    <has-error :form="form" field="course"></has-error>
+                      <has-error :form="form" field="course"></has-error>
+                      <option></option>
+                      <option
+                        v-for="course in courses"
+                        v-bind:value="course.id"
+                        :key="course.id"
+                      >{{course.name}}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -173,6 +179,7 @@ export default {
   data() {
     return {
       isUpdate: false,
+      courses: {},
       students: {},
       form: new Form({
         id: "",
@@ -194,6 +201,12 @@ export default {
         this.students = data.data;
       });
     },
+    loadCourse() {
+      axios.get("api/courses").then(({ data }) => {
+        this.courses = data;
+      });
+    },
+
     updateModalOpen(student) {
       this.isUpdate = true;
       this.form.reset();
@@ -262,6 +275,7 @@ export default {
     console.log("Component mounted.");
   },
   created() {
+    this.loadCourse();
     this.loadUser();
   }
 };

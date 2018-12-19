@@ -54217,6 +54217,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -54224,6 +54230,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     return {
       isUpdate: false,
+      courses: {},
       students: {},
       form: new Form((_ref = {
         id: "",
@@ -54247,6 +54254,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.students = data.data;
       });
     },
+    loadCourse: function loadCourse() {
+      var _this2 = this;
+
+      axios.get("api/courses").then(function (_ref3) {
+        var data = _ref3.data;
+
+        _this2.courses = data;
+      });
+    },
     updateModalOpen: function updateModalOpen(student) {
       this.isUpdate = true;
       this.form.reset();
@@ -54254,7 +54270,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.fill(student);
     },
     updateStudent: function updateStudent(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.form.put("api/students/" + this.form.id).then(function () {
         //success
@@ -54263,16 +54279,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: "Student Update successfully"
         });
         $(".bd-example-modal-lg").modal("hide");
-        _this2.loadUser();
+        _this3.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
     },
     createStudents: function createStudents() {
-      var _this3 = this;
+      var _this4 = this;
 
-      this.form.post("api/students").then(function (_ref3) {
-        var data = _ref3.data;
+      this.form.post("api/students").then(function (_ref4) {
+        var data = _ref4.data;
 
         $(".bd-example-modal-lg").modal("hide");
         toast({
@@ -54280,13 +54296,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           title: "Studnet Created successfully"
         });
 
-        _this3.loadUser();
+        _this4.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
     },
     deleteStudent: function deleteStudent(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal({
         title: "Are you sure?",
@@ -54298,10 +54314,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
-          _this4.form.delete("api/students/" + id).then(function () {
+          _this5.form.delete("api/students/" + id).then(function () {
             swal("Deleted!", "Your file has been deleted.", "success");
             // This is relode page after event perform
-            _this4.loadUser();
+            _this5.loadUser();
           });
         }
       }).catch(function (e) {
@@ -54314,6 +54330,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log("Component mounted.");
   },
   created: function created() {
+    this.loadCourse();
     this.loadUser();
   }
 });
@@ -54664,15 +54681,14 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "course" } }, [
-                            _vm._v("Course")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "gender" } }, [
+                          _vm._v("Course")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
                             directives: [
                               {
                                 name: "model",
@@ -54685,28 +54701,48 @@ var render = function() {
                             class: {
                               "is-invalid": _vm.form.errors.has("course")
                             },
-                            attrs: { type: "text", name: "course" },
-                            domProps: { value: _vm.form.course },
+                            attrs: { name: "course" },
                             on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
                                 _vm.$set(
                                   _vm.form,
                                   "course",
-                                  $event.target.value
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
                                 )
                               }
                             }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "course" }
-                          })
-                        ],
-                        1
-                      )
+                          },
+                          [
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "course" }
+                            }),
+                            _vm._v(" "),
+                            _c("option"),
+                            _vm._v(" "),
+                            _vm._l(_vm.courses, function(course) {
+                              return _c(
+                                "option",
+                                {
+                                  key: course.id,
+                                  domProps: { value: course.id }
+                                },
+                                [_vm._v(_vm._s(course.name))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ])
                     ])
                   ]),
                   _vm._v(" "),
