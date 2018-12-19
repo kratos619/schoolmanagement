@@ -21,4 +21,4 @@ Web Application to handle and help to manage thechers , student , departments, c
 
 ## Note
 
-Need Improvements
+logical Bugs After Adding JWT , Need Improvements
