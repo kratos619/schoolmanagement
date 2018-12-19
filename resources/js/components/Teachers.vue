@@ -17,8 +17,8 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Gender</th>
                   <th>Contact</th>
+                  <th>Gender</th>
                   <th>Department</th>
                   <th>Address</th>
                   <th>Edite</th>
@@ -28,9 +28,9 @@
                   <td>{{teacher.id}}</td>
                   <td>{{teacher.name}}</td>
                   <td>{{teacher.mobile}}</td>
+                  <td>{{teacher.gender}}</td>
                   <td>{{teacher.department_id}}</td>
                   <td>{{teacher.address}}</td>
-
                   <td>
                     <a href="#" v-on:click="updateModalOpen(teacher)" class="btn btn-warning">Edit</a>
                   </td>
