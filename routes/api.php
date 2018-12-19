@@ -26,6 +26,9 @@ Route::get('departmentall', 'DepartmentController@totalNumberDepartment');
 Route::get('coursesall', 'CoursesController@totalNumberCourses');
 
 Route::apiResources([
+    'allUsers' => 'SubuserController'
+]);
+Route::apiResources([
     'teachers' => 'TeachersController'
 ]);
 Route::apiResources([

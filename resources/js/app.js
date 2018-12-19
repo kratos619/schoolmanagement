@@ -73,6 +73,10 @@ let routes = [{
     {
         path: '/departments',
         component: require('./components/Department.vue')
+    },
+    {
+        path: '/users',
+        component: require('./components/Users.vue')
     }
 
 ];

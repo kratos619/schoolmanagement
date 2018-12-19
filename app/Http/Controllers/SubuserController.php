@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class SubuserController extends Controller
 {
@@ -13,18 +14,11 @@ class SubuserController extends Controller
      */
     public function index()
     {
+        $all_user = User::all();
+        return response()->json($all_user, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -78,6 +72,8 @@ class SubuserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $find_user = User::find($id);
+        $find_user->delete();
+        return response()->json($find_user, 200);
     }
 }
