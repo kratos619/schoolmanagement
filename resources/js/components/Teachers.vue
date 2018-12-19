@@ -25,7 +25,7 @@
                   <th>Delete</th>
                 </tr>
 
-                <tr v-for="teacher in teachers" :key="teacher.id">
+                <tr v-for="teacher in teachers,data" :key="teacher.id">
                   <td>{{teacher.id}}</td>
                   <td>{{teacher.name}}</td>
                   <td>{{teacher.mobile}}</td>
@@ -174,17 +174,6 @@ export default {
       axios.get("api/teachers").then(({ data }) => {
         this.teachers = data.data;
       });
-    },
-    loadDepartment() {
-      axios
-        .get("api/department")
-        .then(({ data }) => {
-          this.departments = data;
-          console.log(this.departments);
-        })
-        .catch(e => {
-          console.log(e);
-        });
     },
     updateModalOpen(teacher) {
       this.isUpdate = true;

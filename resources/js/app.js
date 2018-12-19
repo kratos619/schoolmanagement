@@ -42,7 +42,7 @@ window.toast = toast;
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 let routes = [{
-        path: '/student',
+        path: '/students',
         component: require('./components/Student.vue')
     },
     {

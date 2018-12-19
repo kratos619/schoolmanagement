@@ -14087,7 +14087,7 @@ window.toast = toast;
 Vue.component('example-component', __webpack_require__(43));
 
 var routes = [{
-    path: '/student',
+    path: '/students',
     component: __webpack_require__(46)
 }, {
     path: '/teachers',
@@ -55129,18 +55129,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.teachers = data.data;
       });
     },
-    loadDepartment: function loadDepartment() {
-      var _this2 = this;
-
-      axios.get("api/department").then(function (_ref2) {
-        var data = _ref2.data;
-
-        _this2.departments = data;
-        console.log(_this2.departments);
-      }).catch(function (e) {
-        console.log(e);
-      });
-    },
     updateModalOpen: function updateModalOpen(teacher) {
       this.isUpdate = true;
       this.form.reset();
@@ -55148,7 +55136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.form.fill(teacher);
     },
     updateTeacher: function updateTeacher(id) {
-      var _this3 = this;
+      var _this2 = this;
 
       this.form.put("api/teachers/" + this.form.id).then(function () {
         //success
@@ -55157,16 +55145,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: "Data Update successfully"
         });
         $(".bd-example-modal-lg").modal("hide");
-        _this3.loadUser();
+        _this2.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
     },
     createTeacher: function createTeacher() {
-      var _this4 = this;
+      var _this3 = this;
 
-      this.form.post("api/teachers").then(function (_ref3) {
-        var data = _ref3.data;
+      this.form.post("api/teachers").then(function (_ref2) {
+        var data = _ref2.data;
 
         $(".bd-example-modal-lg").modal("hide");
         toast({
@@ -55174,13 +55162,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: "Teachers Created successfully"
         });
 
-        _this4.loadUser();
+        _this3.loadUser();
       }).catch(function (e) {
         console.log(e);
       });
     },
     deleteTeacher: function deleteTeacher(id) {
-      var _this5 = this;
+      var _this4 = this;
 
       swal({
         title: "Are you sure?",
@@ -55192,10 +55180,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.value) {
-          _this5.form.delete("api/teachers/" + id).then(function () {
+          _this4.form.delete("api/teachers/" + id).then(function () {
             swal("Deleted!", "Your file has been deleted.", "success");
             // This is relode page after event perform
-            _this5.loadUser();
+            _this4.loadUser();
           });
         }
       }).catch(function (e) {
@@ -55238,7 +55226,7 @@ var render = function() {
                 [
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._l(_vm.teachers, function(teacher) {
+                  _vm._l((_vm.teachers, _vm.data), function(teacher) {
                     return _c("tr", { key: teacher.id }, [
                       _c("td", [_vm._v(_vm._s(teacher.id))]),
                       _vm._v(" "),

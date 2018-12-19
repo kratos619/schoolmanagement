@@ -105,7 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               
                <li class="nav-item">
-                <router-link to="/student" class="nav-link " href="#">
+                <router-link to="/students" class="nav-link " href="#">
                  <i class="fas fa-user"></i>
                   <p>Student</p>
                 </router-link>

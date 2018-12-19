@@ -8,10 +8,8 @@ use App\Department;
 
 class TeachersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
+           
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +17,8 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        $all_teachers = Teachers::all();
-        return response()->json($all_teachers, 200);
+        $all_techer = Teachers::all();
+        return response()->json($all_techer, 200);
     }
 
 
