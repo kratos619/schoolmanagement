@@ -19,31 +19,32 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'remember_token' => str_random(10)
+
     ];
 });
 
 
-$factory->define(App\Student::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'gender' => $faker->title($gender = 'male'|'female') ,
-        'address' => $faker->address(),
-        'mobile' => $faker->phoneNumber,
-        'dob' => $faker->dateTimeBetween($startDate = '-18 years', $endDate = 'now', $timezone = null),
-        "rollnumber" =>$faker->ean8(),
-        "course" => $faker->numberBetween(1, 10),
-    ];
-});
-$factory->define(App\Teachers::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'gender' => $faker->title($gender = 'male'|'female') ,
-        'address' => $faker->address(),
-        'mobile' => $faker->phoneNumber,
-        "department_id" => $faker->numberBetween(1, 10),
-    ];
-});
+// $factory->define(App\Student::class, function (Faker $faker) {
+//     return [
+//         'name' => $faker->name,
+//         'gender' => $faker->title($gender = 'male'|'female') ,
+//         'address' => $faker->address(),
+//         'mobile' => $faker->phoneNumber,
+//         'dob' => $faker->dateTimeBetween($startDate = '-18 years', $endDate = 'now', $timezone = null),
+//         "rollnumber" =>$faker->ean8(),
+//         "course" => $faker->numberBetween(1, 10),
+//     ];
+// });
+// $factory->define(App\Teachers::class, function (Faker $faker) {
+//     return [
+//         'name' => $faker->name,
+//         'gender' => $faker->title($gender = 'male'|'female') ,
+//         'address' => $faker->address(),
+//         'mobile' => $faker->phoneNumber,
+//         "department_id" => $faker->numberBetween(1, 10),
+//     ];
+// });
 
 // $factory->define(App\Courses::class, function (Faker $faker) {
 //     return [
