@@ -23,3 +23,6 @@ Route::apiResources([
 Route::apiResources([
     'teachers' => 'TeachersController'
 ]);
+Route::apiResources([
+    'courses' => 'CoursesController'
+]);
