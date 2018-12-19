@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Teachers;
+use App\Department;
 
 class TeachersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        $all_teachers = Teachers::latest()->paginate(10);
+        $all_teachers = Teachers::all();
         return response()->json($all_teachers, 200);
     }
 

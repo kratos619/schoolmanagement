@@ -24,6 +24,7 @@
                   <th>Edite</th>
                   <th>Delete</th>
                 </tr>
+
                 <tr v-for="teacher in teachers" :key="teacher.id">
                   <td>{{teacher.id}}</td>
                   <td>{{teacher.name}}</td>
@@ -117,8 +118,11 @@
                     >
                       <has-error :form="form" field="department_id"></has-error>
                       <option></option>
-                      <option value="1">MCA</option>
-                      <option value="2">BCA</option>
+                      <option
+                        v-for="department in departments"
+                        :key="department.id"
+                        v-bind:value="department.id"
+                      >{{department.name}}</option>
                     </select>
                   </div>
                 </div>
@@ -128,7 +132,7 @@
                 <textarea
                   class="form-control"
                   name="address"
-                  rows="10"
+                  rows="5"
                   v-model="form.address"
                   :class="{ 'is-invalid': form.errors.has('address') }"
                 ></textarea>
@@ -152,14 +156,13 @@ export default {
     return {
       isUpdate: false,
       teachers: {},
+      departments: {},
       form: new Form({
         id: "",
         name: "",
-
         address: "",
         dob: "",
         gender: "",
-
         mobile: "",
         department_id: ""
       })
@@ -171,6 +174,17 @@ export default {
       axios.get("api/teachers").then(({ data }) => {
         this.teachers = data.data;
       });
+    },
+    loadDepartment() {
+      axios
+        .get("api/department")
+        .then(({ data }) => {
+          this.departments = data;
+          console.log(this.departments);
+        })
+        .catch(e => {
+          console.log(e);
+        });
     },
     updateModalOpen(teacher) {
       this.isUpdate = true;
@@ -241,6 +255,7 @@ export default {
   },
   created() {
     this.loadUser();
+    this.loadDepartment();
   }
 };
 </script>
