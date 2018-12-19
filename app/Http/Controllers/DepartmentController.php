@@ -18,6 +18,12 @@ class DepartmentController extends Controller
         return response()->json($all_department, 200);
     }
 
+    public function totalNumberDepartment()
+    {
+        $all_Departments = Department::all()->count();
+        return response()->json($all_Departments, 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

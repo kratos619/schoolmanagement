@@ -18,6 +18,13 @@ class CoursesController extends Controller
         return response()->json($all_courses, 200);
     }
 
+    
+    public function totalNumberCourses()
+    {
+        $all_courses = Courses::all()->count();
+        return response()->json($all_courses, 200);
+    }
+
 
     /**
      * Store a newly created resource in storage.

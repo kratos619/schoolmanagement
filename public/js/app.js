@@ -58290,110 +58290,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isEdit: false,
-      departments: {},
-      form: new Form({
-        id: "",
-        name: ""
-      })
+      totalStudents: "",
+      totalTeachers: "",
+      totalDepartment: "",
+      totalCourses: ""
     };
   },
 
   methods: {
-    upddateDepartment: function upddateDepartment(id) {
+    allStudents: function allStudents() {
       var _this = this;
 
-      this.form.put("api/department/" + this.form.id).then(function () {
-        toast({
-          type: "success",
-          title: "Department Update successfully"
-        });
-        $("#exampleModal").modal("hide");
-        _this.loadDepartment();
-      }).catch(function (e) {
-        console.log(e);
-      });
-    },
-    updateModalOpen: function updateModalOpen(department) {
-      this.isEdit = true;
-      this.form.reset();
-      $("#exampleModal").modal("show");
-      this.form.fill(department);
-    },
-    createDepartment: function createDepartment() {
-      var _this2 = this;
-
-      this.form.post("api/department").then(function (_ref) {
+      axios.get("api/studentall").then(function (_ref) {
         var data = _ref.data;
 
-        toast({
-          type: "success",
-          title: "Department Created successfully"
-        });
-        $("#exampleModal").modal("hide");
-
-        _this2.loadDepartment();
-      }).catch(function (e) {
-        console.log(e);
-      });
+        _this.totalStudents = data;
+        console.log(_this.totalStudents);
+      }).catch();
     },
-    deleteDepartment: function deleteDepartment(id) {
-      var _this3 = this;
+    allTeachers: function allTeachers() {
+      var _this2 = this;
 
-      swal({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then(function (result) {
-        if (result.value) {
-          _this3.form.delete("api/department/" + id).then(function () {
-            swal("Deleted!", "Your file has been deleted.", "success");
-            // This is relode page after event perform
-            _this3.loadDepartment();
-          });
-        }
-      }).catch(function (e) {
-        console.log(e);
-      });
-    },
-    loadDepartment: function loadDepartment() {
-      var _this4 = this;
-
-      axios.get("api/department").then(function (_ref2) {
+      axios.get("api/teachersall").then(function (_ref2) {
         var data = _ref2.data;
 
-        _this4.courses = data;
-        console.log(_this4.courses);
-      }).catch(function (e) {
-        console.log(e);
-      });
+        _this2.totalTeachers = data;
+      }).catch();
+    },
+    allDepartments: function allDepartments() {
+      var _this3 = this;
+
+      axios.get("api/departmentall").then(function (_ref3) {
+        var data = _ref3.data;
+
+        _this3.totalDepartment = data;
+      }).catch();
+    },
+    allCourses: function allCourses() {
+      var _this4 = this;
+
+      axios.get("api/coursesall").then(function (_ref4) {
+        var data = _ref4.data;
+
+        _this4.totalCourses = data;
+      }).catch();
     }
+  },
+  created: function created() {
+    this.allStudents();
+    this.allTeachers();
+    this.allDepartments();
+    this.allCourses();
   },
   mounted: function mounted() {
     console.log("Component mounted.");
-  },
-  created: function created() {
-    this.loadDepartment();
   }
 });
 
@@ -58406,164 +58360,63 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
-        [_vm._v("add New Department")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Department Details")
+    _c("div", { staticClass: "row pt-3" }, [
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-info" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.totalStudents))]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Number Of Students")])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("table", { staticClass: "table" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.departments, function(department) {
-                  return _c("tr", { key: department.id }, [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _vm._v(_vm._s(department.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(department.name))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-warning",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              _vm.updateModalOpen(department)
-                            }
-                          }
-                        },
-                        [_vm._v("Edite")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              _vm.deleteDepartment(department.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Delete")]
-                      )
-                    ])
-                  ])
-                }),
-                0
-              )
-            ])
-          ])
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-success" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.totalTeachers))]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Total Teachers")])
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-warning" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.totalDepartment))]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Total Departments")])
+          ]),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-danger" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v(_vm._s(_vm.totalCourses))]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Total Courses")])
+          ]),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _vm._m(7)
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "exampleModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      _vm.isEdit
-                        ? _vm.upddateDepartment()
-                        : _vm.createDepartment()
-                    }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", { attrs: { for: "" } }, [_vm._v("Name")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.name,
-                              expression: "form.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            placeholder: "Department Name.."
-                          },
-                          domProps: { value: _vm.form.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "name", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "name" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(2)
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -58571,63 +58424,85 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Edite")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Delete")])
-      ])
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-bag" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Departments")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
+    return _c(
+      "a",
+      { staticClass: "small-box-footer", attrs: { href: "/students" } },
+      [
+        _vm._v("\n          More info\n          "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-stats-bars" })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Save changes")]
-      )
+    return _c(
+      "a",
+      { staticClass: "small-box-footer", attrs: { href: "/teachers" } },
+      [
+        _vm._v("\n          More info\n          "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-person-add" })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "small-box-footer", attrs: { href: "/departments" } },
+      [
+        _vm._v("\n          All Departments\n          "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "ion ion-pie-graph" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "small-box-footer", attrs: { href: "/courses" } },
+      [
+        _vm._v("\n          All Courses\n          "),
+        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+      ]
+    )
   }
 ]
 render._withStripped = true

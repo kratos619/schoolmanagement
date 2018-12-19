@@ -20,7 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResources([
     'students' => 'StudentController'
 ]);
-Route::get('students', 'StudentController@index');
+Route::get('studentall', 'StudentController@totalNumberStudnet');
+Route::get('teachersall', 'TeachersController@totalNumberTeacher');
+Route::get('departmentall', 'DepartmentController@totalNumberDepartment');
+Route::get('coursesall', 'CoursesController@totalNumberCourses');
 
 Route::apiResources([
     'teachers' => 'TeachersController'

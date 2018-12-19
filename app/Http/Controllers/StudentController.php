@@ -13,13 +13,21 @@ class StudentController extends Controller
     // }
     
     /**
-     * Display a listing of the resource.
+     * Display a listinfg of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $all_students = Student::latest()->paginate(10);
+        $all_students = Student::all();
+        //$all_students = Student::all()->count();
+
+        return response()->json($all_students, 200);
+    }
+
+    public function totalNumberStudnet()
+    {
+        $all_students = Student::all()->count();
         return response()->json($all_students, 200);
     }
 

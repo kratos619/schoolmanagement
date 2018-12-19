@@ -20,7 +20,11 @@ class TeachersController extends Controller
         $all_techer = Teachers::all();
         return response()->json($all_techer, 200);
     }
-
+    public function totalNumberTeacher()
+    {
+        $all_teachers = Teachers::all()->count();
+        return response()->json($all_teachers, 200);
+    }
 
     /**
      * Store a newly created resource in storage.
