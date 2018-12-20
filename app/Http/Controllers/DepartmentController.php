@@ -33,11 +33,11 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-           'name' => 'required'
+           'department_id' => 'required'
        ]);
        
         Department::create([
-           'name' => $request->name
+           'department_id' => $request->department_id
        ]);
         return response()->json("Success", 200);
     }
@@ -65,7 +65,7 @@ class DepartmentController extends Controller
     {
         $slecte_depertment = Department::findOrFail($id);
         $this->validate($request, [
-           'name' => 'required'
+           'department_id' => 'required'
        ]);
         $slecte_depertment->update($request->all());
         return response()->json("Success", 200);

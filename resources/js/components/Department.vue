@@ -24,7 +24,7 @@
               <tbody>
                 <tr v-for="department in departments" :key="department.id">
                   <th scope="row">{{department.id}}</th>
-                  <td>{{department.name}}</td>
+                  <td>{{department.department_id}}</td>
                   <td>
                     <a
                       href="#"
@@ -69,11 +69,11 @@
                 <label for>Name</label>
                 <input
                   type="text"
-                  name="name"
-                  v-model="form.name"
+                  name="department_id"
+                  v-model="form.department_id"
                   class="form-control"
                   placeholder="Department Name.."
-                  :class="{ 'is-invalid': form.errors.has('name') }"
+                  :class="{ 'is-invalid': form.errors.has('department_id') }"
                 >
                 <has-error :form="form" field="name"></has-error>
               </div>
@@ -97,7 +97,7 @@ export default {
       departments: {},
       form: new Form({
         id: "",
-        name: ""
+        department_id: ""
       })
     };
   },

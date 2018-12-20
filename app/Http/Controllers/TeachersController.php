@@ -20,24 +20,24 @@ class TeachersController extends Controller
     public function index()
     {
         //$all_techer = Teachers::all();
-        // $all_techer = DB::table('teachers')
-        // ->select('teachers.*', 'departments.name')
-        // ->crossjoin('departments')
-        // ->get();
-        // \dd($all_techer);
+        //\dd($all_data);
         // $all_techer = DB::table('teachers')
         // ->selectRaw('select teachers.name , department.name from teachers inner join departments on teachers.id = departments.id')
         // -get();
-
-        $all_techer = Teachers::all();
+        
+        // $all_data = Teachers::all();
         // ->select('department_id')
         // ->get();
-
+        
         // $all_department = DB::table('departments')
         // ->select('name')
         // ->where($all_techer);
         //\dd($all_techer->department_id);
-        return response()->json($all_techer, 200);
+        $all_data = DB::table('teachers')
+        ->select('*', 'departments.department_id')
+        ->join('departments', 'departments.id', '=', 'teachers.department_id')
+        ->get();
+        return response()->json($all_data, 200);
     }
     
     public function totalNumberTeacher()

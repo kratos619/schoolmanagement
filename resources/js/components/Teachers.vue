@@ -122,7 +122,7 @@
                         v-for="department in departments"
                         :key="department.id"
                         v-bind:value="department.id"
-                      >{{department.name}}</option>
+                      >{{department.department_id}}</option>
                     </select>
                   </div>
                 </div>

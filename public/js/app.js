@@ -58009,7 +58009,7 @@ var render = function() {
                                   key: department.id,
                                   domProps: { value: department.id }
                                 },
-                                [_vm._v(_vm._s(department.name))]
+                                [_vm._v(_vm._s(department.department_id))]
                               )
                             })
                           ],
@@ -59195,7 +59195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       departments: {},
       form: new Form({
         id: "",
-        name: ""
+        department_id: ""
       })
     };
   },
@@ -59323,7 +59323,7 @@ var render = function() {
                       _vm._v(_vm._s(department.id))
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(department.name))]),
+                    _c("td", [_vm._v(_vm._s(department.department_id))]),
                     _vm._v(" "),
                     _c("td", [
                       _c(
@@ -59411,24 +59411,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.name,
-                              expression: "form.name"
+                              value: _vm.form.department_id,
+                              expression: "form.department_id"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          class: {
+                            "is-invalid": _vm.form.errors.has("department_id")
+                          },
                           attrs: {
                             type: "text",
-                            name: "name",
+                            name: "department_id",
                             placeholder: "Department Name.."
                           },
-                          domProps: { value: _vm.form.name },
+                          domProps: { value: _vm.form.department_id },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "name", $event.target.value)
+                              _vm.$set(
+                                _vm.form,
+                                "department_id",
+                                $event.target.value
+                              )
                             }
                           }
                         }),
