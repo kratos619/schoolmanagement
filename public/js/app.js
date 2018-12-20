@@ -57640,6 +57640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           type: "success",
           title: "Data Update successfully"
         });
+        _this3.form.reset();
         $(".bd-example-modal-lg").modal("hide");
         _this3.loadUser();
       }).catch(function (e) {

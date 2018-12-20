@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Teachers;
 use App\Department;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class TeachersController extends Controller
 {
@@ -17,9 +19,27 @@ class TeachersController extends Controller
      */
     public function index()
     {
+        //$all_techer = Teachers::all();
+        // $all_techer = DB::table('teachers')
+        // ->select('teachers.*', 'departments.name')
+        // ->crossjoin('departments')
+        // ->get();
+        // \dd($all_techer);
+        // $all_techer = DB::table('teachers')
+        // ->selectRaw('select teachers.name , department.name from teachers inner join departments on teachers.id = departments.id')
+        // -get();
+
         $all_techer = Teachers::all();
+        // ->select('department_id')
+        // ->get();
+
+        // $all_department = DB::table('departments')
+        // ->select('name')
+        // ->where($all_techer);
+        //\dd($all_techer->department_id);
         return response()->json($all_techer, 200);
     }
+    
     public function totalNumberTeacher()
     {
         $all_teachers = Teachers::all()->count();

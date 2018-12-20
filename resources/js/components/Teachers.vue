@@ -29,8 +29,8 @@
                   <td>{{teacher.id}}</td>
                   <td>{{teacher.name}}</td>
                   <td>{{teacher.mobile}}</td>
-                  <td>{{teacher.gender}}</td>
-                  <td>{{teacher.department_id}}</td>
+                  <td>{{teacher.gender }}</td>
+                  <td>{{teacher.department_id }}</td>
                   <td>{{teacher.address}}</td>
                   <td>
                     <a href="#" v-on:click="updateModalOpen(teacher)" class="btn btn-warning">Edit</a>
@@ -201,6 +201,7 @@ export default {
             type: "success",
             title: "Data Update successfully"
           });
+          this.form.reset();
           $(".bd-example-modal-lg").modal("hide");
           this.loadUser();
         })
